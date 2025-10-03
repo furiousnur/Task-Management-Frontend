@@ -11,16 +11,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
     setLoading(true);
     setError("");
-
     try {
       console.log("api - ", api);
       const res = await api.post("/auth/login", { username, password });
-      console.log("Login success:", res.data);
-      localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      const resData = res.data;
+      if (resData && resData.statusCode === 200) {
+        localStorage.setItem("token", resData.data.access_token);
+        navigate("/dashboard");
+      }
+      setError(resData?.message || "Invalid credentials");
     } catch (err) {
       setError(err.response?.data?.message || "Invalid credentials");
     } finally {
@@ -34,7 +35,6 @@ const Login = () => {
         <div className="card shadow-lg border-0 rounded-4">
           <div className="card-body p-4">
             <h3 className="text-center mb-4 fw-bold text-primary">Welcome Back 👋</h3>
-
             {error && (
               <div className="alert alert-danger py-2 text-center">{error}</div>
             )}
