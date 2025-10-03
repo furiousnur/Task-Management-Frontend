@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
+import toastr from "toastr";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -19,6 +20,7 @@ const Login = () => {
       const resData = res.data;
       if (resData && resData.statusCode === 200) {
         localStorage.setItem("token", resData.data.access_token);
+        toastr.success("Login successful!");
         navigate("/dashboard");
       }
       setError(resData?.message || "Invalid credentials");

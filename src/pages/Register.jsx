@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
+import toastr from "toastr";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -38,6 +39,7 @@ const Register = () => {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      toastr.success("Registration successful! Please Login.");
       setTimeout(() => navigate("/"), 2000);
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
@@ -57,9 +59,6 @@ const Register = () => {
 
             {error && (
               <div className="alert alert-danger py-2 text-center">{error}</div>
-            )}
-            {success && (
-              <div className="alert alert-success py-2 text-center">{success}</div>
             )}
 
             <form onSubmit={handleSubmit}>
