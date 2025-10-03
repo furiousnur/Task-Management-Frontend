@@ -9,7 +9,6 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -17,7 +16,6 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    setSuccess("");
 
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
@@ -26,15 +24,13 @@ const Register = () => {
     }
 
     try {
-      const res = await api.post("/auth/register", {
+      await api.post("/auth/register", {
         username,
         email,
         password,
         confirmPassword,
       });
 
-      setSuccess("Registration successful! Please login.");
-      console.log("Register success:", res.data);
       setUsername("");
       setEmail("");
       setPassword("");
