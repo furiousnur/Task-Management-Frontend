@@ -9,11 +9,13 @@ Here’s a clean, updated **README section** with instructions for cloning your 
 
 ## Setup Instructions
 
-### 1. Clone the Repository from the development branch.
+### 1. Clone the Repository from the development branch or after clone checkout the branch development
 
 ```bash
 git clone https://github.com/furiousnur/Task-Management-Frontend
 cd Task-Management-Frontend
+git fetch --all #if not found the branch
+git checkout development
 ````
 
 ### 2. Install Dependencies
