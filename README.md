@@ -38,7 +38,7 @@ cp .env.example .env
 
 ```
 PORT=4000
-REACT_APP_API_URL=http://localhost:4000/api
+REACT_APP_URL=http://localhost:4000
 ```
 
 ### 4. Running the App
